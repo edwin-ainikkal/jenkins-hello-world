@@ -8,8 +8,9 @@ pipeline {
         stage('Build') {
             steps {
                 // Get some code from a Git repository
-                git 'https://github.com/edwin-ainikkal/jenkins-hello-world.git'
+                git branch: 'main', url: 'https://github.com/edwin-ainikkal/jenkins-hello-world.git'
                 // Add other build steps here
+                sh "mvn clean package -DskipTests=true"
             }
         }
         stage('Unit Test') {
