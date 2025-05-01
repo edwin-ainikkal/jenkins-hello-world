@@ -19,6 +19,12 @@ pipeline {
                 junit stdioRetention: '', testResults: 'target/surefire-reports/TEST-*.xml'
             }
         }
+        stage('Integration Testing') {
+            steps {
+                sh "sleep ${params.SLEEP_TIMER}"
+                sh """ curl -s http://localhost:${params.APPLICATION_PORT}/hello | grep -i "Hello, KodeKloud community!" """
+            }
+        }
         
     }
 }
