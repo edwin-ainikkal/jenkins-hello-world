@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    tools {
+        // Install the Maven version configured as "maven-398" and add it to the path.
+        maven "maven-398"
+    }
+    stages {
+        stage('Build') {
+            steps {
+                // Get some code from a Git repository
+                git 'https://github.com/your-repository-url.git'
+                // Add other build steps here
+            }
+        }
+    }
+}
