@@ -12,5 +12,12 @@ pipeline {
                 // Add other build steps here
             }
         }
+        stage('Unit Test') {
+            steps {
+                sh "mvn test"
+                junit stdioRetention: '', testResults: 'target/surefire-reports/TEST-*.xml'
+            }
+        }
+        
     }
 }
