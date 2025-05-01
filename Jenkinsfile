@@ -22,9 +22,15 @@ pipeline {
         stage('Integration Testing') {
             steps {
                 sh "sleep ${params.SLEEP_TIMER}"
-                sh """ curl -s http://localhost:${params.APPLICATION_PORT}/hello | grep -i "Hello, KodeKloud community!" """
+                sh "curl -v http://localhost:${params.APPLICATION_PORT}/hello"
+                sh """
+                    RESPONSE=\$(curl -s http://localhost:${params.APPLICATION_PORT}/hello)
+                    echo "Response: \$RESPONSE"
+                    echo "\$RESPONSE" | grep -i "Hello, KodeKloud community!"
+                """
             }
         }
+
         
     }
 }
